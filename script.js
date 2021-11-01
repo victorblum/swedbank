@@ -1,11 +1,17 @@
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
+let slider = document.getElementById("myLimit");
+let output = document.getElementById("count");
+output.innerHTML = slider.value;
+slider.oninput = function() {
+    output.innerHTML = this.value;
+}
 
-function showTab(n) {
-  // This function will display the specified tab of the form ...
-  var x = document.getElementsByClassName("page");
+
+let currentPage = 0;
+showPage(currentPage);
+
+function showPage(n) {
+  let x = document.getElementsByClassName("page");
   x[n].style.display = "block";
-  // ... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
@@ -16,57 +22,68 @@ function showTab(n) {
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
   }
-  // ... and run a function that displays the correct step indicator:
   fixStepIndicator(n)
 }
 
 function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("page");
-  // Exit the function if any field in the current tab is invalid:
+  let x = document.getElementsByClassName("page");
   if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form... :
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
+  x[currentPage].style.display = "none";
+  currentPage = currentPage + n;
+  if (currentPage >= x.length) {
     document.getElementById("application_form").submit();
     return false;
   }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
+  showPage(currentPage);
 }
 
 function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, i, valid = true;
+  let x, y, i, valid = true;
   x = document.getElementsByClassName("page");
-  y = x[currentTab].getElementsByTagName("input");
-  // A loop that checks every input field in the current tab:
+  y = x[currentPage].getElementsByTagName("input");
   for (i = 0; i < y.length; i++) {
-    // If a field is empty...
     if (y[i].value == "") {
-      // add an "invalid" class to the field:
       y[i].className += " invalid";
-      // and set the current valid status to false:
       valid = false;
     }
   }
-  // If the valid status is true, mark the step as finished and valid:
   if (valid) {
-    document.getElementsByClassName("circle")[currentTab].className += " finish";
+    document.getElementsByClassName("circle")[currentPage].className += " finish";
   }
-  return valid; // return the valid status
+  return valid;
 }
 
 function fixStepIndicator(n) {
-  // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("circle");
+  let i, x = document.getElementsByClassName("circle");
   for (i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(" active", "");
   }
-  //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
+
+let answers = document.getElementById('nextBtnLast').addEventListener('click', () => {
+  let radio = document.querySelectorAll('.have_card');
+  for (let i = 0; i < radio.length; i++) {
+    if (radio[i].checked) {
+      dataHaveCard = radio[i].value;
+      break;
+    }
+  }
+  let dataLimit = document.getElementById('myLimit').value;
+  let dataCard = document.getElementById('card').value;
+  let dataFirst = document.getElementById('first_name').value;
+  let dataLast = document.getElementById('last_name').value;
+  let dataIsik = document.getElementById('isik_name').value;
+  let dataEmail = document.getElementById('email').value;
+  let dataIPhone = document.getElementById('phone').value;
+
+  document.querySelector('.have_credit').innerHTML = dataHaveCard;
+  document.querySelector('.credit_limit').innerHTML = dataLimit;
+  document.querySelector('.why_need').innerHTML = dataCard;
+  document.querySelector('.name_first').innerHTML = dataFirst;
+  document.querySelector('.name_last').innerHTML = dataLast;
+  document.querySelector('.name_isik').innerHTML = dataIsik;
+  document.querySelector('.email_info').innerHTML = dataEmail;
+  document.querySelector('.phone_info').innerHTML = dataIPhone;
+})
+

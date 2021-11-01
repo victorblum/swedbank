@@ -8,23 +8,7 @@
     <title>Application Form</title>
 </head>
 <body>
-    <form id="application_form" action="">
-        <div class="page">
-            <h1>Credit card application</h1>
-            Do you already have credit cards?
-            <div class="item" data-title="I have a credit card from Swedbank or another bank">
-                <label for="yes"><input type="radio" id="yes" name="cards" value="yes" required>Yes</label>
-            </div>
-            <div class="item" data-title="I don't have a credit card from Swedbank or another bank">
-                <label for="no"></label><input type="radio" id="no" name="cards" value="no" required>No</label>
-            </div>
-            <div class="button_box">
-                <div class="buttons">
-                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                </div>
-            </div>
-        </div>
+    <form id="application_form">
         <div class="page">
             <div class="page_content">
                 <div class="pic_desc__block">
@@ -59,15 +43,40 @@
             </div>
         </div>
         <div class="page">
+            <div class="logo_box">
+                <img src="pictures/swedbank-logo.png" alt="Swedbank logo" width="150px" style="text-align: right;">
+            </div>
             <h1>Credit card application</h1>
-            Why do you need a card?
-            <select name="card" id="card" required>
-                <option style="display:none"></option>
-                <option value="purchases">Purchases</option>
-                <option value="cash">Cash withdrawal</option>
-                <option value="installments">Purchase by installments</option>
-                <option value="repayment">Repayment of other loans</option>
-            </select>
+            <div class="options_box">
+                Why do you need a card?
+                <select name="card" id="card" required>
+                    <option style="display:none"></option>
+                    <option value="Purchases">Purchases</option>
+                    <option value="Cash withdrawal">Cash withdrawal</option>
+                    <option value="Purchase by installments">Purchase by installments</option>
+                    <option value="Repayment of other loans">Repayment of other loans</option>
+                </select>
+            </div>
+            <div class="button_box">
+                <div class="buttons">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+            </div>
+        </div>        
+        <div class="page">
+            <div class="logo_box">
+                <img src="pictures/swedbank-logo.png" alt="Swedbank logo" width="150px" style="text-align: right;">
+            </div>
+            <h1>Credit card application</h1>
+            Desired credit limit:
+            <div class="limit_box">
+                <input type="range" min="1000" max="100000" value="50000" class="limit" id="myLimit" step="1000" />
+                <div class="limit_count">
+                    <h2 id="count"></h2>
+                    <h2>&#8364;</h2>
+                </div>
+            </div>
             <div class="button_box">
                 <div class="buttons">
                     <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -76,11 +85,19 @@
             </div>
         </div>
         <div class="page">
+            <div class="logo_box">
+                <img src="pictures/swedbank-logo.png" alt="Swedbank logo" width="150px" style="text-align: right;">
+            </div>
             <h1>Credit card application</h1>
-            Name & ID-card:
-            <p><input placeholder="First name..." oninput="this.className = ''" required></p>
-            <p><input placeholder="Last name..." oninput="this.className = ''" required></p>
-            <p><input placeholder="ID-card.." oninput="this.className = ''" required></p>
+            Do you already have credit cards?
+            <div class="radio_buttons">
+                <div class="radio_item" data-title="I have a credit card from Swedbank or another bank">
+                    <label for="yes"><input type="radio" class="have_card" id="yes" name="cards" value="Yes" required />&ensp;Yes</label>
+                </div>
+                <div class="radio_item" data-title="I don't have a credit card from Swedbank or another bank">
+                    <label for="no"></label><input type="radio" class="have_card" id="no" name="cards" value="No" checked required />&ensp;No</label>
+                </div>
+            </div>
             <div class="button_box">
                 <div class="buttons">
                     <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -89,45 +106,100 @@
             </div>
         </div>
         <div class="page">
+            <div class="logo_box">
+                <img src="pictures/swedbank-logo.png" alt="Swedbank logo" width="150px" style="text-align: right;">
+            </div>
+            <h1>Credit card application</h1>
+            Name & Isikukood:
+            <div class="name_box">
+                <input id="first_name" type="text" placeholder="First name" oninput="this.className = ''" required />
+                <input id="last_name" type="text" placeholder="Last name" oninput="this.className = ''" required />
+                <div class="form__field">
+                    <input id="isik_name" type="text" placeholder="Isikukood" oninput="this.className = ''" onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="11" maxlength="11" required />
+                    <span class="form__error">This field should contain an isikukood in the format 12345678910</span>
+                </div>
+            </div>
+            <div class="button_box">
+                <div class="buttons">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="logo_box">
+                <img src="pictures/swedbank-logo.png" alt="Swedbank logo" width="150px" style="text-align: right;">
+            </div>
             <h1>Credit card application</h1>
             Contact Info:
-            <p><input placeholder="E-mail..." oninput="this.className = ''" required></p>
-            <p><input placeholder="Phone..." oninput="this.className = ''" required></p>
-            <input type="checkbox" id="scales" name="scales" checked>
-            <label for="scales">I accept the terms of information transfer</label>
-            <div class="button_box">
+            <div class="contact_box">
+                <div class="form__field">
+                    <input id="email" type="email" name="email" placeholder="E-mail" oninput="this.className = ''" />
+                    <span class="form__error">This field should contain an e-mail in the format example@site.com</span>
+                </div>
+                <div class="form__field">
+                    <input id="phone" type="tel" name="phone" placeholder="Phone" oninput="this.className = ''" pattern="[\+]\d{3}\s\d{8}" minlength="13" maxlength="13" required />
+                    <span class="form__error">This field should contain an phone number in the format +372 45678909</span>
+                </div>
+            </div>
+            <div class="button_box__terms">
+                <div class="terms_box">
+                    <input type="checkbox" id="scales" name="scales" checked />
+                    <label for="scales">&ensp;I accept the</label>
+                        <a target="_blank" href="https://www.swedbank.ee/static/pdf/private/home/important/gdpr/Principles_of_processing_Personal_data_EE_ENG_01032021.pdf"><pre> terms of processing customer data</pre></a></label>
+                </div>
                 <div class="buttons">
                     <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    <button type="button" id="nextBtnLast" onclick="nextPrev(1)">Next</button>
                 </div>
             </div>
-        </div>
+        </div>      
         <div class="page">
-            <h1>Credit card application</h1>
-            <label for="story">Tell us your story:</label>
-            <textarea id="story" name="story" rows="5" cols="33" style="min-width:100%" placeholder="It was a dark and stormy night..." required></textarea>
-            <div class="button_box">
-                <div class="buttons">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                </div>
+            <div class="logo_box">
+                <img src="pictures/swedbank-logo.png" alt="Swedbank logo" width="150px" style="text-align: right;">
             </div>
-        </div>
-        <div class="page">
             <h1>Credit card application</h1>
             <div class="page_content">
-                <p>Why do you need a card?</p>
-                <p>Do you already have credit cards?</p>
-                <p>Name & ID-card:</p>
-                <p>Contact Info:</p>
-                <p>Tell us your story:</p>
+                <div class="answers_block">
+                    <div>
+                        <h3>Check the entered data and press submit</h3>
+                        <div class="answers">
+                            <h4>Why do you need a card:&emsp;</h4>
+                            <p class="why_need"></p>
+                        </div>
+                        <div class="answers">
+                            <h4>Desired credit limit:&emsp;</h4>
+                            <p class="credit_limit"></p>
+                            <p>&#8364;</p>
+                        </div>
+                        <div class="answers">
+                            <h4>Already have credit cards:&emsp;</h4>
+                            <p class="have_credit"></p>
+                        </div>
+                        <div class="answers">
+                            <h4>Name & Isikukood:&emsp;</h4>
+                            <p class="name_first"></p>&nbsp;
+                            <p class="name_last"></p>&nbsp;
+                            <p class="name_isik"></p>
+                        </div>
+                        <div class="answers">
+                            <h4>Contact Info:</h4>&emsp;
+                            <p class="phone_info"></p>&nbsp;
+                            <p class="email_info"></p>
+                        </div>
+                    </div>
+                    <img src="pictures/card_type.png" alt="Card picture" width="250px">
+                </div>
+                <div class="questions_box">
+                    <label for="story">Have any questions?</label>
+                    <textarea id="story" name="story" style="min-width:100%" placeholder="Leave your questions here and a bank employee will contact you."></textarea>
+                </div>
             </div>
-            <div class="first_page__buttons">
+            <div class="last_page__buttons">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                 <button type="submit" id="submitBtn" onclick="">Submit</button>
             </div>
         </div>
-        
         <div class="circle_box">
             <span class="circle"></span>
             <span class="circle"></span>
